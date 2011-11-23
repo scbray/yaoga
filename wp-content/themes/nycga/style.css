@@ -114,46 +114,32 @@ color:#422;
 
 /************* header **************************************/
 
-h1#logo {
-	text-indent: -9000px;
+#header {
+	background:white;
 }
-#header-link {
-	position:absolute;
-	top:0;
-	left:0;
+#header h1#site-title {
+	float: none;          /* must override left set in buddypress/bp-themes/bp-default/_inc/css/default.css */
+	margin-right: 270px;
+	margin-bottom: 25px;  /* must override 0px set in buddypress/bp-themes/bp-default/_inc/css/default.css */
+	padding: 0.5em 0 0;
 }
-
-#header-link a {	
-	width: 1000px;
-	height: 150px;
-	display: block;
+#header h1#site-title a {
+	color: #000000;
+	font-size: 60px;
+	font-weight: bold;
+	text-decoration: none;
 }
-
-
-#header-section #header {
-	background-repeat:no-repeat;
-} 
-
-#search-bar {
-	position: absolute;
-	z-index: 1000;
-	right: 22px;
-	top: -26px;
+#site-title a:hover,
+#site-title a:focus,
+#site-title a:active {
+	color: #1982d1;
 }
-
-form#search-form {
-	display: none;
+#site-description {
+	color: #7a7a7a;
+	font-size: 18px;
+	margin: 0.5em 270px 0.5em 0;
 }
 
-
-#header-section {
-	position:relative;
-}
-
-div#header {
-	z-index: 800;
-	margin-bottom: 0px;
-}
 
 /**************  admin nav **************/
 
@@ -280,7 +266,7 @@ div#header {
 }
 
 #nav {
-	margin: 90px 20px 0 0;
+	margin: 30px 20px 0 0;
 	list-style: none;
 	padding: 0;
 	position: relative;
