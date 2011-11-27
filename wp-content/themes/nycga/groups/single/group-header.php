@@ -39,14 +39,21 @@ do_action( 'bp_before_group_header' );
 
 <div id="item-header-content">
 	<h2><a href="<?php bp_group_permalink(); ?>" title="<?php bp_group_name(); ?>"><?php bp_group_name(); ?></a></h2>
-	<span class="highlight"><?php bp_group_type(); ?></span> <span class="activity"><?php printf( __( 'active %s', 'buddypress' ), bp_get_group_last_active() ); ?></span>
+	<span class="hideme">
+    <span class="highlight"><?php bp_group_type(); ?></span> <span class="activity"><?php printf( __( 'active %s', 'buddypress' ), bp_get_group_last_active() ); ?></span>
+    </span>
 
 	<?php do_action( 'bp_before_group_header_meta' ); ?>
 
 	<div id="item-meta">
-
-		<?php bp_group_description(); ?>
-
+		<div id="desc-container">
+		<div id="top-group-desc-excerpt">
+		<?php bp_group_description_excerpt(); ?>
+		</div>
+		<div id="top-group-desc">
+				<?php bp_group_description(); ?>
+		</div>
+		</div>
 		<div id="item-buttons">
 
 			<?php do_action( 'bp_group_header_actions' ); ?>

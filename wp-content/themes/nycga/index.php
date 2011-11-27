@@ -2,6 +2,7 @@
 
 	<div id="content">
 		<div class="padder">
+			<h3 class="pagetitle"><?php wp_title(); ?></h3>
 
 		<?php do_action( 'bp_before_blog_home' ) ?>
 

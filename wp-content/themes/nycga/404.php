@@ -1,19 +1,30 @@
-<?php get_header() ?>
+<?php
+/**
+ * The template for displaying 404 pages (Not Found).
+ 
+ * Template name: 404
+ * @package WordPress
+ * @subpackage NYCGA
+ */
 
-	<div id="content">
-		<div class="padder one-column">
-			<?php do_action( 'bp_before_404' ); ?>
-			<div id="post-0" class="post page-404 error404 not-found" role="main">
-				<h2 class="posttitle"><?php _e( "Page not found", 'buddypress' ); ?></h2>
+get_header(); ?>
+wrong 404 template
+	<div id="container">
+		<div id="content" role="main">
 
-				<p><?php _e( "We're sorry, but we can't find the page that you're looking for. Perhaps searching will help.", 'buddypress' ); ?></p>
-				<?php get_search_form(); ?>
+			<div id="post-0" class="post error404 not-found">
+				<h1 class="entry-title"><?php _e( 'Not Found', 'nycga' ); ?></h1>
+				<div class="entry-content">
+					<p><?php _e( 'Apologies, but the page you requested could not be found. Perhaps searching will help.', 'nycga' ); ?></p>
+					<?php get_search_form(); ?>
+				</div><!-- .entry-content -->
+			</div><!-- #post-0 -->
 
-				<?php do_action( 'bp_404' ); ?>
-			</div>
+		</div><!-- #content -->
+	</div><!-- #container -->
+	<script type="text/javascript">
+		// focus on search field after it has loaded
+		document.getElementById('s') && document.getElementById('s').focus();
+	</script>
 
-			<?php do_action( 'bp_after_404' ) ?>
-		</div><!-- .padder -->
-	</div><!-- #content -->
-
-<?php get_footer() ?>
+<?php get_footer(); ?>

@@ -1,3 +1,5 @@
+<!--EDITS: Changed If on Line 30 so that one must be either a mod or an admin post status updates. - JDG -->
+
 <div class="item-list-tabs no-ajax" id="subnav" role="navigation">
 	<ul>
 		<li class="feed"><a href="<?php bp_group_activity_feed_link() ?>" title="<?php _e( 'RSS Feed', 'buddypress' ); ?>"><?php _e( 'RSS', 'buddypress' ) ?></a></li>
@@ -25,8 +27,8 @@
 
 <?php do_action( 'bp_before_group_activity_post_form' ) ?>
 
-<?php if ( is_user_logged_in() && bp_group_is_member() ) : ?>
-	<?php locate_template( array( 'activity/post-form.php'), true ) ?>
+<?php if (( is_user_logged_in()) && (bp_group_is_admin() || bp_group_is_mod()) ): ?>
+	<?php locate_template( array( 'activity/post-form.php'), true ) ?>	
 <?php endif; ?>
 
 <?php do_action( 'bp_after_group_activity_post_form' ) ?>

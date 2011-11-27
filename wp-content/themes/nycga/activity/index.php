@@ -13,9 +13,9 @@
 
 	<?php do_action( 'bp_before_directory_activity_page' ); ?>
 
+<?php date_default_timezone_set('UTC'); /* Temporary Fix */ ?>
 	<div id="content">
 		<div class="padder">
-
 			<?php do_action( 'bp_before_directory_activity' ); ?>
 
 			<?php if ( !is_user_logged_in() ) : ?>
@@ -150,7 +150,6 @@
 
 		</div><!-- .padder -->
 	</div><!-- #content -->
-
 	<?php do_action( 'bp_after_directory_activity_page' ); ?>
 
 <?php get_sidebar( 'buddypress' ); ?>
