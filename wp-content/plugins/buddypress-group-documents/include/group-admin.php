@@ -16,7 +16,6 @@ function bp_group_documents_group_admin_nav() {
 add_action( 'bp_setup_nav', 'bp_group_documents_group_admin_nav', 2 );
 add_action( 'admin_menu', 'bp_group_documents_group_admin_nav', 2 );
 
-
 /*
  * bp_group_documents_group_admin_setting()
  * 

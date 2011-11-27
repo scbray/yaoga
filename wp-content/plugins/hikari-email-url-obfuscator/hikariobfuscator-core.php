@@ -124,6 +124,7 @@ class HkMuob extends HkMuob_HkTools{
 		// plugins and themes
 		add_filter('widget_execphp',array($this,'filter'),1002);
 		add_filter('navt_codeblock',array($this,'filter'),1002);
+                add_filter('groups_ga_custom_tab',array($this,'filter'),1002);
 		add_filter('hksmtc_twitter_link',array($this,'filter'),1002);
 		add_filter('HkTC_get_comment_title',array($this,'filter'),1002);
 		
@@ -180,9 +181,10 @@ class HkMuob extends HkMuob_HkTools{
 		if(empty($this->links)) return;
 
 		// first we add js file with decrypting code
-		wp_register_script('HkMuob_jscript', $this->plugin_dir_url.'HkMuob.js',null,null,true);
-		wp_print_scripts('HkMuob_jscript');
-
+		//wp_register_script('HkMuob_jscript', $this->plugin_dir_url.'HkMuob.js',null,null,true);
+		//wp_enqueue_script( 'HkMuob_jscript' );
+		//wp_print_scripts('HkMuob_jscript');
+		echo "<script type=\"text/javascript\" src=\"".$this->plugin_dir_url.'HkMuob.js'."\"></script>";
 
 		// now we add links' data, a js call for each link, passing data to decrypting code work on it
 		$script .= "<script type='text/javascript'>\n".$this->js['open'];

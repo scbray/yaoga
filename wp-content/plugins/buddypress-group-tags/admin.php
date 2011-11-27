@@ -5,33 +5,39 @@ function gtags_admin() {
 
 	/* If the form has been submitted and the admin referrer checks out, save the settings */
 	if ( isset( $_POST['submit'] )  && check_admin_referer('gtags_admin') ) {
-		update_option( 'gtags_dir_cloud', $_POST['gtags_dir_cloud'] );
-		update_option( 'gtags_show_in_dir_list', $_POST['gtags_show_in_dir_list'] );
-		
-		if ( !$_POST['gtags_single_header'] )
-			$_POST['gtags_single_header'] = 'false';
-		update_option( 'gtags_single_header', $_POST['gtags_single_header'] );
-		
-		// this is an array
-		update_option( 'gtags_cloud_args', $_POST['gtags_cloud_args'] );
-		
-		update_option( 'gtags_exclude', $_POST['gtags_exclude'] );
-		update_option( 'gtags_include', $_POST['gtags_include'] );
-		if ($_POST['gtags_exclude'] && $_POST['gtags_include'])
-			echo "<div class='error'><p>If you fill in both exclude and include, include will be ignored. Just letting ya know. </p></div>";
+		$blog_list = get_blog_list( 0, 'all' );//ERICLEWIS
+		foreach ($blog_list AS $blog) { //ERICLEWIS
+		    switch_to_blog($blog['blog_id']);//ERICLEWIS
+		    update_option( 'gtags_dir_cloud', $_POST['gtags_dir_cloud'] );
+			update_option( 'gtags_show_in_dir_list', $_POST['gtags_show_in_dir_list'] );
 			
-		update_option( 'gtags_popular_limit', $_POST['gtags_popular_limit'] );
-
-		// consolidate group category form data into array
-		$i = 0;
-		foreach($_POST['gtags_category']['slug'] as $slug ) {
-			if ($slug)
-				$gtags_category_array[ trim( $slug ) ] = trim( $_POST['gtags_category']['desc'][$i] );
-			$i++;
-		}
-		update_option( 'gtags_category', $gtags_category_array );
+			if ( !$_POST['gtags_single_header'] )
+				$_POST['gtags_single_header'] = 'false';
+			update_option( 'gtags_single_header', $_POST['gtags_single_header'] );
+			
+			// this is an array
+			update_option( 'gtags_cloud_args', $_POST['gtags_cloud_args'] );
+			
+			update_option( 'gtags_exclude', $_POST['gtags_exclude'] );
+			update_option( 'gtags_include', $_POST['gtags_include'] );
+			if ($_POST['gtags_exclude'] && $_POST['gtags_include'])
+				echo "<div class='error'><p>If you fill in both exclude and include, include will be ignored. Just letting ya know. </p></div>";
 				
-		$updated = true;
+			update_option( 'gtags_popular_limit', $_POST['gtags_popular_limit'] );
+
+			// consolidate group category form data into array
+			$i = 0;
+			foreach($_POST['gtags_category']['slug'] as $slug ) {
+				if ($slug)
+					$gtags_category_array[ trim( $slug ) ] = trim( $_POST['gtags_category']['desc'][$i] );
+				$i++;
+			}
+			update_option( 'gtags_category', $gtags_category_array );
+					
+			$updated = true;
+		    restore_current_blog();//ERICLEWIS
+		}//ERICLEWIS
+		
 	}
 
 ?>	

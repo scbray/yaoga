@@ -3,10 +3,10 @@
 Plugin Name: BuddyPress Group Tags
 Plugin URI: http://wordpress.org/extend/plugins/buddypress-group-tags/
 Description: This plugin allow Groups to be organized by tags via a tag cloud above the group directory or in a widget
-Version: 2.0.1
+Version: 7.0.1
 Revision Date: September 26, 2011
 License: GNU General Public License 2.0 (GPL) http://www.gnu.org/licenses/gpl.html
-Author: Deryk Wenaus
+Author: Deryk Wenaus, edited by Eric Lewis
 Author URI: http://www.bluemandala.com
 */
 
@@ -232,7 +232,8 @@ function gtags_display_tags() {
 		echo '	<div id="gtags-top-cloud" class="gtags"'.$hide_tag_style.'>'. wp_generate_tag_cloud( gtags_make_tags(), gtags_cloud_args() ).'</div>';
 		
 		if ( $gtags_dir_cloud=='link' ) {
-			echo '	<div id="gtags-toggle-top"><a href="javascript:void(0);">'.__('Show Group Categories (tag cloud) +','gtags').'</a></div>';
+			// echo '	<div id="gtags-toggle-top"><a href="javascript:void(0);">'.__('Show Group Categories (tag cloud) +','gtags').'</a></div>';
+			echo '	<div id="gtags-toggle-top"><a href="javascript:void(0);">'.__('Group Tag Cloud) +','gtags').'</a></div>';
 		}
 		
 		echo '</div>';

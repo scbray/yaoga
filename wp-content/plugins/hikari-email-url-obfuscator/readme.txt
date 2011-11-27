@@ -1,4 +1,4 @@
-﻿=== Hikari Email & URL Obfuscator ===
+=== Hikari Email & URL Obfuscator ===
 Contributors: shidouhikari 
 Donate link: http://Hikari.ws/wordpress/#donate
 Tags: obfuscate, email, spam, Page Rank, javascript, unobstructive javascript, mail, post, posts, comments, widget, CSS, content, nofollow, ROT13, cc8b, SEO

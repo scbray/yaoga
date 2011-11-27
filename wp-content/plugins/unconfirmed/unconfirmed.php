@@ -170,16 +170,19 @@ class BBG_Unconfirmed {
 			'orderby' => 'registered',
 			'order'   => 'desc',
 			'offset'  => 0,
-			'number'  => 10
+			'number'  => 10,
+                        'email'   => ''
 		);
 		
 		$r = wp_parse_args( $args, $defaults );
 		extract( $r );
 		
-		// Our query will be different for multisite and for non-multisite
+                // Our query will be different for multisite and for non-multisite
 		if ( $this->is_multisite ) {			
 			$sql['select'] 	= "SELECT * FROM $wpdb->signups";
-			$sql['where'] 	= "WHERE active = 0";
+			$sql['where'] 	= "WHERE active = 0"; //
+                        if ($email)
+                                $sql['where'] = $sql['where'] . " AND user_email = '" . $email . "'";
 			
 			// Switch the non-MS orderby keys to their MS counterparts
 			if ( 'user_registered' == $orderby )
@@ -769,6 +772,7 @@ class BBG_Unconfirmed {
 			'order'		=> $sortable->get_order,
 			'number'	=> $pagination->get_per_page,
 			'offset'	=> $offset,
+                        'email'         => $_GET['email'],
 		);
 		
 		$this->setup_users( $args );
@@ -789,6 +793,13 @@ class BBG_Unconfirmed {
 		
 		<h2><?php _e( 'Unconfirmed', 'unconfirmed' ) ?></h2>
 		
+		<form action="" method="get" style="float: right;">
+			E-mail Search:
+			<input type="hidden" name="page" value="unconfirmed" />
+			<input type="text" name="email" />
+			<input type="submit" name="Search" />
+		</form>
+
 		<?php $this->render_messages() ?>
 		
 		<form action="<?php echo $this->base_url ?>" method="post">

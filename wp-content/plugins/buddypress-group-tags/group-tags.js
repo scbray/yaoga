@@ -29,10 +29,16 @@ jQuery(document).ready( function() {
 		j('#group-tags').val( contents + sep + tag );
 	});		
 	
-	j('#gtags-toggle-top').click(function() {
-		j('#gtags-top-cloud').show();
-		j('#gtags-toggle-top').hide();
-	})
+	// j('#gtags-toggle-top').click(function() {
+	// 		j('#gtags-top-cloud').show();
+	// 		j('#gtags-toggle-top').hide();
+	// 	})
+	
+	j("#gtags-toggle-top").toggle(function(){
+		j("#gtags-top-cloud").animate({height:'show', opacity:'show'}, 'slow');
+	}, function(){
+		jQuery("#gtags-top-cloud").animate({height:'hide', opacity:'hide'}, 'slow');
+	});
 
 });
 

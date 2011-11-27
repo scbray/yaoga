@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: BP Group Documents
+Plugin Name: BP Group Files
 PLugin URI: http://wordpress.org/extend/plugins/buddypress-group-documents/
 Description: This BuddyPress component creates a document storage area within each group
 Version: 0.4.0
@@ -141,7 +141,12 @@ function bp_group_documents_setup_globals() {
 	do_action('bp_group_documents_globals_loaded');
 }
 add_action( 'plugins_loaded', 'bp_group_documents_setup_globals', 5 );
-add_action( 'admin_menu', 'bp_group_documents_setup_globals', 2 );
+if (is_multisite()){
+	add_action( 'network_admin_menu', 'bp_group_documents_setup_globals', 2 );
+}else{
+	add_action( 'admin_menu', 'bp_group_documents_setup_globals', 2 );
+}
+
 
 
 /**
@@ -161,7 +166,7 @@ function bp_group_documents_check_installed() {
 	//Add the component's administration tab under the "BuddyPress" menu for site administrators
 	require (dirname(__FILE__) . '/include/admin.php');
 
-	add_submenu_page( 'bp-general-settings', __( 'Group Documents Admin', 'bp-group-documents' ), __( 'Group Documents', 'bp-group-documents' ), 'manage_options', 'bp-group-documents-settings', 'bp_group_documents_admin' );
+	add_submenu_page( 'bp-general-settings', __( 'Group Files Admin', 'bp-group-documents' ), __( 'Group Files', 'bp-group-documents' ), 'manage_options', 'bp-group-documents-settings', 'bp_group_documents_admin' );
 
 
 	/* Need to check db tables are current */
@@ -178,7 +183,11 @@ function bp_group_documents_check_installed() {
 	add_option('bp_group_documents_progress_bar',true);
 	add_option('bp_group_documents_forum_attachments',false);
 }
-add_action( 'admin_menu', 'bp_group_documents_check_installed',50);
+if (is_multisite()){
+	add_action( 'network_admin_menu', 'bp_group_documents_check_installed',50);
+}else{
+	add_action( 'admin_menu', 'bp_group_documents_check_installed',50);
+}
 
 
 /**************************************************************************
@@ -213,7 +222,7 @@ function bp_group_documents_setup_nav() {
 	/* Add the subnav item only to the single group nav item*/
 	if ( $bp->is_single_item )
     bp_core_new_subnav_item( array( 
-		'name' => __( 'Documents', 'bp-group-documents' ), 
+		'name' => __( 'Files', 'bp-group-documents' ), 
 		'slug' => $bp->group_documents->slug, 
 		'parent_url' => $groups_link, 
 		'parent_slug' => bp_get_current_group_slug(),
@@ -225,7 +234,11 @@ function bp_group_documents_setup_nav() {
 	do_action('bp_group_documents_nav_setup');
 }
 add_action( 'bp_setup_nav', 'bp_group_documents_setup_nav', 2 );
-add_action( 'admin_menu', 'bp_group_documents_setup_nav', 2 );
+if (is_multisite()){
+	add_action( 'network_admin_menu', 'bp_group_documents_setup_nav', 2 );
+}else{
+	add_action( 'admin_menu', 'bp_group_documents_setup_nav', 2 );
+}
 
 
 
@@ -253,7 +266,7 @@ add_action('plugins_loaded','bp_group_documents_set_cookies');
  * registers the taxonomies to use with the Wordpress Custom Taxonomy API
  */
 function bp_group_documents_register_taxonomies() {
-	register_taxonomy('group-documents-category','group-document',array('hierarchical'=>true,'label'=>__('Group Document Categories','bp-group-documents'),'query_var'=>false));
+	register_taxonomy('group-documents-category','group-document',array('hierarchical'=>true,'label'=>__('Group File Categories','bp-group-documents'),'query_var'=>false));
 }
 add_action('init','bp_group_documents_register_taxonomies');
 
@@ -288,10 +301,10 @@ function bp_group_documents_display() {
 
 
 function bp_group_documents_display_header() {
-	_e( 'Group Documents', 'bp-group-documents' );
+	_e( 'Group Files', 'bp-group-documents' );
 }
 function bp_group_documents_display_title() {
-	_e( 'Document List', 'bp-group-documents' );
+	_e( 'File List', 'bp-group-documents' );
 }
 
 /****************************************************************************
@@ -341,7 +354,7 @@ function bp_group_documents_display_content() {
 
 
 		<?php if( '1.1' != substr(BP_VERSION,0,3) ) { ?>
-		<h3><?php _e('Document List','bp-group-documents'); ?></h3>
+		<h3><?php _e('File List','bp-group-documents'); ?></h3>
 		<?php } ?>
 
 
@@ -396,7 +409,7 @@ function bp_group_documents_display_content() {
 
 	<?php } else { ?>
 	<div id="message" class="info">
-		<p><?php _e( 'There have been no documents uploaded for this group', 'bp-group-documents') ?></p>
+		<p><?php _e( 'There have been no files uploaded for this group', 'bp-group-documents') ?></p>
 	</div>
 
 	<?php } ?>
@@ -426,7 +439,7 @@ function bp_group_documents_display_content() {
 		<?php } ?>
 
 		<?php if( BP_GROUP_DOCUMENTS_FEATURED ) { ?>
-		<label class="bp-group-documents-featured-label"><input type="checkbox" name="bp_group_documents_featured" class="bp-group-documents-featured" value="1" <?php if( $template->featured ) echo 'checked="checked"'; ?> > <?php _e('Featured Document','bp-group-documents'); ?></label>
+		<label class="bp-group-documents-featured-label"><input type="checkbox" name="bp_group_documents_featured" class="bp-group-documents-featured" value="1" <?php if( $template->featured ) echo 'checked="checked"'; ?> > <?php _e('Featured File','bp-group-documents'); ?></label>
 		<?php } ?>
 
 		<div id="document-detail-clear" class="clear"></div>
@@ -459,7 +472,7 @@ function bp_group_documents_display_content() {
 	</div><!--end #post-new-topic-->
 
 	<?php if( $template->operation == 'add' ) { ?>
-	<a class="button" id="bp-group-documents-upload-button" href="" style="display:none;"><?php _e('Upload a New Document','bp-group-documents'); ?></a>
+	<a class="button" id="bp-group-documents-upload-button" href="" style="display:none;"><?php _e('Upload a New File','bp-group-documents'); ?></a>
 	<?php } ?>
 
 	<?php } ?>
