@@ -226,3 +226,10 @@ function nycga_hidden_activities($a, $activities)
 	return $activities;
 }
 
+// on login page, replace workpress logo with site name
+function nycga_login_header()
+{
+	echo '<link rel=\'stylesheet\' id=\'nycga-login-css\'  href=' . get_option( 'siteurl' ) . '/wp-content/themes/nycga/login.css type=\'text/css\' media=\'all\' />';
+}
+add_action('login_head', 'nycga_login_header');
+
