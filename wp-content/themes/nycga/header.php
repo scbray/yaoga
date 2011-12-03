@@ -21,15 +21,11 @@
 		<div id="header-section">
 		<?php do_action( 'bp_before_header' ) ?>
 		<div id="header">
+			<hgroup>
+				<h1 id="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+				<h2 id="site-description"><?php bloginfo( 'description' ); ?></h2>
+			</hgroup>
 			
-				<div class="padder">
-					<div id="header-link"><a href="<?php echo home_url(); ?>" title="<?php _ex( 'Home', 'Home page banner link title', 'buddypress' ); ?>">&nbsp;</a>
-										</div>
-					<h1 id="logo" role="banner"><a href="<?php echo home_url(); ?>" title="<?php _ex( 'Home', 'Home page banner link title', 'buddypress' ); ?>"><?php bp_site_name(); ?></a></h1>
-						
-				</div><!-- .padder -->
-			
-
 			<div id="navigation" role="navigation">
 				<?php wp_nav_menu( array( 'container' => false, 'menu_id' => 'nav', 'theme_location' => 'primary', 'fallback_cb' => 'bp_dtheme_main_nav' ) ); ?>
 			</div>
